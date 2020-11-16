@@ -121,8 +121,9 @@ class PermissionController extends BaseController
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        $user = User::find($request['user_id'])->firstOrFail();
+        $user = User::find($request['user_id']);
         if ($user->assignRole($role)) {
+            $user->save();
             return response()->json(['success' => $user], 200);
         }
     }

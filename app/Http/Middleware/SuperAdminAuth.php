@@ -17,7 +17,7 @@ class SuperAdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('api')->check() && $request->user('api')->type >= 2) {
+        if (Auth::guard('api')->check() && $request->user('api')->hasRole('super-admin')) {
             return $next($request);
         } else {
             $message = ["message" => "Permission Denied"];
