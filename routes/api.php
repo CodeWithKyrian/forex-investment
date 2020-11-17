@@ -21,15 +21,15 @@ Route::group(['prefix' => 'products'], function () {
     Route::apiResource('/{product}/reviews', 'App\Http\Controllers\ReviewController');
 });
 
-Route::apiResource('/articles', 'App\Http\Controllers\API\ArticleController')->middleware('api.admin');
+Route::apiResource('/articles', 'App\Http\Controllers\API\ArticleController');
 
 Route::post('register', 'App\Http\Controllers\API\AccessController@register');
 Route::post('login', 'App\Http\Controllers\API\AccessController@login');
 
-
+Route::apiResource('/users', 'App\Http\Controllers\API\UserController');
 Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'App\Http\Controllers\API\AccessController@logout');
-    Route::apiResource('/users', 'App\Http\Controllers\API\UserController');
+
     // Route::post('/user/edit', 'App\Http\Controllers\API\UserController@update');
 
     Route::get('roles', 'App\Http\Controllers\API\PermissionController@role_list');

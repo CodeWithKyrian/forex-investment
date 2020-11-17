@@ -10,7 +10,7 @@ class UserController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware(['api.admin'])->only('index');
+        // $this->middleware(['api.admin'])->only('index');
     }
     /**
      * Display a listing of the resource.
