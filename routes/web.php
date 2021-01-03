@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', function () {
+Route::any('{catchall}', function () {
     return view('master');
-});
+})->where('catchall', '.*');
+
+// Route::get('/{any}', function () {
+//     return view('master');
+// });
+// Route::get('/{any}/{all}', function () {
+//     return view('master');
+// });
+// Route::get('/', function () {
+//     return view('master');
+// });

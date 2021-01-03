@@ -1,55 +1,29 @@
-require('./bootstrap');
-
 window.Vue = require('vue');
+require('./plugins/filter');
+require('./plugins/progressbar');
+require('./plugins/swal');
+require('./plugins/customEvents');
 
-//Import Vue Filter
-require('./filter');
+import Vuex from 'vuex'
+import App from './App.vue'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueFinalModal from 'vue-final-modal'
+import storeData from "./store"
+import router from './plugins/router'
 
-//Import progressbar
-require('./progressbar');
+Vue.use(Vuex)
+Vue.use(VueFinalModal())
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-//Setup custom events 
-require('./customEvents');
+const store = new Vuex.Store(storeData)
+window.store = store
+window.axios = require('axios');
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + store.getters.getToken;
 
-//Import View Router
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
-//Import Sweetalert2
-import Swal from 'sweetalert2'
-window.Swal = Swal
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    onOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
-window.Toast = Toast
-
-//Import v-from
-import { Form, HasError, AlertError } from 'vform'
-window.Form = Form;
-Vue.component(HasError.name, HasError)
-Vue.component(AlertError.name, AlertError)
-
-//Routes
-import { routes } from './routes';
-
-//Register Routes
-const router = new VueRouter({
-    routes,
-    mode: 'history',
-
-})
-
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 const app = new Vue({
+    render: h => h(App),
     el: '#app',
+    store,
     router
 });

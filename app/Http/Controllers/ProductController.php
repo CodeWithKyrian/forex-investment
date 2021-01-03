@@ -44,9 +44,7 @@ class ProductController extends Controller
         $product->save();
 
         return response([
-
             'data' => new ProductResource($product)
-
         ], Response::HTTP_CREATED);
     }
 

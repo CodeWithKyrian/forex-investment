@@ -40,7 +40,7 @@ class AccessController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Validation Error.', $validator->errors(), 200);
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -50,7 +50,7 @@ class AccessController extends BaseController
 
             return $this->sendResponse($success, 'User login successfully.');
         } else {
-            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised'], 200);
         }
     }
     public function logout(Request $request)
