@@ -15943,7 +15943,7 @@ __webpack_require__.r(__webpack_exports__);
         }, 1500);
       })["catch"](function (err) {
         if (err == 'Unauthorised') {
-          Swal.fire('Wrong Details', 'Check the details you provided and try again', 'error');
+          Swal.fire('Wrong Details', 'Check the details you provided and try again!', 'error');
           _this.loading = false;
         } else {
           Swal.fire("There's a problem", 'Check your connection and try again', 'error');

@@ -87,7 +87,7 @@ export default {
         })
         .catch((err) =>{
           if (err == 'Unauthorised'){
-            Swal.fire('Wrong Details', 'Check the details you provided and try again', 'error');
+            Swal.fire('Wrong Details', 'Check the details you provided and try again!', 'error');
             this.loading = false
           }
           else{
